@@ -1,4 +1,4 @@
-function [  ] = distortGraph( filename, outname )
+function [  ] = distortGraph( filename, outfile )
 
 addpath('jsonlab');
 addpath('AntonSemechko-Bounding-Spheres-And-Circles');
@@ -8,6 +8,15 @@ data = loadjson(filename);
 
 nodes = data.nodes;
 edges = data.edges;
+
+xx = [];
+yy = [];
+
+for i = 1:size(nodes, 2)
+    n = nodes{i};
+    xx(end + 1) = n.x;
+    yy(end + 1) = n.y;
+end
 
 [radium_nocarto, center_nocarto] = ExactMinBoundCircle([xx; yy]');
 
@@ -29,6 +38,8 @@ end
 
 savejson([], djson, 'maps_carto.json');
 add_brackets('maps_carto.json');
+
+dtvert_count = zeros(size(xx, 2), 1);
 
 xt = (xx - center_nocarto(1)) / radium_nocarto * 100;
 yt = (yy - center_nocarto(2)) / radium_nocarto * 100;
