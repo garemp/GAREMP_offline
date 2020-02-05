@@ -12,14 +12,18 @@ and [brrcrites](https://github.com/brrcrites)/[graph-coloring](https://github.co
 
 ##
 
-# Source file
+## Source file
 
 File 'maps.json' which is generated from [Gephi](https://github.com/gephi/gephi) (A Graph modelling and visualization tool) is the source file of the following offline processes.
 
 ## 
 
-# Offline Processes
+## Offline Processes
 
-## Run addArrow.m
+### mark directed edges
 
-## Run flipArrow.m
+Run addArrows('maps.json', 'maps+arrows.json'); to mark directed edges as 'curved' in maps.json.
+
+### flip directed deges
+
+Run flipArrows();
