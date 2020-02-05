@@ -4,16 +4,12 @@ Analyzing and comparing map projections with [GAREMP!](http://garemp.github.io)
 
 http://garemp.github.io/
 
-##
-
 ## License
 Apache-2.0 © 2019-2020 Jin Yan
 
 Capital University of Economics and Business
 
 Beijing, China
-
-##
 
 ## Sample file
 
