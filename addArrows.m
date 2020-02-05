@@ -87,7 +87,7 @@ savejson([], data, outfile);
 
 end
 
-function [  ] = addArrow_inside( filename )
+function [  ] = addArrow_inside( name1, name2 )
 
 global arrow_count;
 
