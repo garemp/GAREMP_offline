@@ -44,3 +44,5 @@ Run addColors('maps+mono.json', 'maps+color.json'); to calculate intersection be
 
 ### add attributes and relationship
 
+
+Above commands could be executed in batch as garemp_offline().
