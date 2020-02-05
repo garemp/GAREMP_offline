@@ -26,6 +26,6 @@ Run addArrows('maps.json', 'maps+arrows.json'); to mark directed edges as 'curve
 
 ### flip directed deges
 
-Run flipArrows('maps+arrows.json', 'maps+flipped.json'); to flip source and target end-points of undirected edges if needed.
+Run flipEdgess('maps+arrows.json', 'maps+flipped.json'); to flip source and target end-points of undirected edges if needed.
 
 
