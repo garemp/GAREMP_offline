@@ -42,7 +42,7 @@ for i = 1:size(conn_from, 2)
 end
 fclose(fp);
 
-system('./color 1+maps.col -l > carto_color');
+system('./color maps.col -l > carto_color');
 
 fid = fopen('carto_color');
 fidout = fopen('maps_color', 'w');
