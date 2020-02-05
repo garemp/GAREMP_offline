@@ -26,6 +26,8 @@ Run addArrows('maps.json', 'maps+arrows.json'); to mark directed edges as 'curve
 
 ### flip directed deges
 
-Run flipEdgess('maps+arrows.json', 'maps+flipped.json'); to flip source and target end-points of undirected edges if needed.
+Run flipEdges('maps+arrows.json', 'maps+flipped.json'); to flip source and target end-points of undirected edges if needed.
 
+### distort the graph
 
+Run distortGraph('maps+flipped.json', 'maps+distort.json'); to distort the graph based on cartogram algorithm.
