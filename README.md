@@ -9,3 +9,15 @@ and two executables:
 [Flow-Based Cartogram Generator](https://github.com/Flow-Based-Cartograms/go_cart), 
 
 and [brrcrites](https://github.com/brrcrites)/[graph-coloring](https://github.com/brrcrites/graph-coloring).
+
+#Source file
+
+A JSON file 'maps.json' is generated from [Gephi](https://github.com/gephi/gephi) (A Graph modelling and visualization tool).
+
+#Offline Process
+
+## 
+
+Run addArrow.m
+
+Run flipArrow.m
