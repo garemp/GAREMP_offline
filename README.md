@@ -13,7 +13,7 @@ Beijing, China
 
 ## Sample file
 
-File 'maps.json' which is generated from [Gephi](https://github.com/gephi/gephi) (A Graph modelling and visualization tool) is the source and sample file of the following offline processes.
+File 'maps.json' which is generated from [Gephi](https://github.com/gephi/gephi) (A Graph modelling and visualization tool) is provided as the source and sample file of the following offline processes.
 
 You can process your own JSON file by using the following approach.
 
@@ -59,5 +59,6 @@ Run addColors('maps+mono.json', 'maps+color.json'); to calculate intersection be
 
 ### add attributes and relationship
 
+Run addInfo('maps+color.json', 'maps+results.json'); to add attributes, classification, relationship, adjust order or drawing, and calculate neighborship of nodes to obtain the final JSON file used in GAREMP.
 
 Above commands could be executed in batch as garemp_offline().
