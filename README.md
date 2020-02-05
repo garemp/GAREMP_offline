@@ -13,7 +13,7 @@ Beijing, China
 
 ## Sample file
 
-File 'maps.json' which is generated from [Gephi](https://github.com/gephi/gephi) (A Graph modelling and visualization tool) is provided as the source and sample file of the following offline processes.
+File 'maps+sample.json' which is generated from [Gephi](https://github.com/gephi/gephi) (A Graph modelling and visualization tool) is provided as the source and sample file of the following offline processes.
 
 You can process your own JSON file by using the following approach.
 
@@ -37,7 +37,7 @@ and [brrcrites](https://github.com/brrcrites)/[graph-coloring](https://github.co
 
 ### mark directed edges
 
-Run addArrows('maps.json', 'maps+arrows.json'); to mark directed edges as 'curved' in maps.json.
+Run addArrows('maps+sample.json', 'maps+arrows.json'); to mark directed edges as 'curved' in maps.json.
 
 ### flip undirected deges
 
@@ -59,6 +59,12 @@ Run addColors('maps+mono.json', 'maps+color.json'); to calculate intersection be
 
 ### add attributes and relationship
 
-Run addInfo('maps+color.json', 'maps+results.json'); to add attributes, classification, relationship, adjust order or drawing, and calculate neighborship of nodes and endpoints of edges to obtain the final JSON file used in GAREMP.
+Run addInfo('maps+color.json', 'maps.json'); to add attributes, classification, relationship, adjust order or drawing, and calculate neighborship of nodes and endpoints of edges to obtain the final JSON file used in GAREMP.
+
+### Run command in one command
 
 Above commands could be executed in batch as garemp_offline().
+
+## Sequences of JSON file
+
+export form Gephi -> maps+sample.json -> maps+arrows.json -> maps+flipped.json -> maps+distort.json -> maps+mono.json -> maps+color.json -> maps.json -> used in [GAREMP!](http://garemp.github.io)
