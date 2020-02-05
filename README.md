@@ -1,4 +1,12 @@
-Offline processes of [GAREMP](http://garemp.github.io/) is depend on 
+GAREMP: Graphical Attribute and Relationship Explorer for Map Projections
+
+Analyzing and comparing map projections with [GAREMP!](http://garemp.github.io)
+
+http://garemp.github.io/
+
+##
+
+Offline processes of GAREMP is depend on 
 
 [fangq](https://github.com/fangq)/[JSONLAB](https://github.com/fangq/jsonlab) (a MATLAB toolbox to encode/decode JSON files), 
 
@@ -21,7 +29,9 @@ Beijing, China
 
 ## Source file
 
-File 'maps.json' which is generated from [Gephi](https://github.com/gephi/gephi) (A Graph modelling and visualization tool) is the source file of the following offline processes.
+File 'maps.json' which is generated from [Gephi](https://github.com/gephi/gephi) (A Graph modelling and visualization tool) is the source and sample file of the following offline processes.
+
+You can process your own JSON file by using the following approach.
 
 ## Prerequisites
 
