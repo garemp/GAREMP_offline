@@ -118,7 +118,6 @@ thisarea = [];
 for i=1:size(dt_tris, 1)/4
     xxx = dt_tris(i*4-3:i*4, 1);
     yyy = dt_tris(i*4-3:i*4, 2);
-    plot(xxx, yyy, 'r-');
     thisarea(end + 1) = polyarea(xxx, yyy);
 end
 
