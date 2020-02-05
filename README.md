@@ -59,6 +59,6 @@ Run addColors('maps+mono.json', 'maps+color.json'); to calculate intersection be
 
 ### add attributes and relationship
 
-Run addInfo('maps+color.json', 'maps+results.json'); to add attributes, classification, relationship, adjust order or drawing, and calculate neighborship of nodes to obtain the final JSON file used in GAREMP.
+Run addInfo('maps+color.json', 'maps+results.json'); to add attributes, classification, relationship, adjust order or drawing, and calculate neighborship of nodes and endpoints of edges to obtain the final JSON file used in GAREMP.
 
 Above commands could be executed in batch as garemp_offline().
