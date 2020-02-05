@@ -34,6 +34,8 @@ Run flipEdges('maps+arrows.json', 'maps+flipped.json'); to flip source and targe
 
 Run distortGraph('maps+flipped.json', 'maps+distort.json'); to distort the graph based on cartogram algorithm.
 
+This step would take a long time for cartogram-based distortion. Have a break.
+
 ### flip undirected deges once more
 
 Run flipEdges('maps+distort.json', 'maps+mono.json'); to flip source and target end-points of undirected edges once more.
