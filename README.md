@@ -6,6 +6,25 @@ http://garemp.github.io/
 
 ##
 
+## License
+Apache-2.0 © 2019-2020 Jin Yan
+
+Capital University of Economics and Business
+
+Beijing, China
+
+##
+
+## Sample file
+
+File 'maps.json' which is generated from [Gephi](https://github.com/gephi/gephi) (A Graph modelling and visualization tool) is the source and sample file of the following offline processes.
+
+You can process your own JSON file by using the following approach.
+
+## Prerequisites
+
+Clone dependence (JSONLAB, Bounding-Spheres-And-Circles, Flow-Based Cartogram Generator, and graph-coloring, see below), and build Flow-Based Cartogram Generator, and graph-coloring, move executables of Flow-Based Cartogram Generator, and graph-coloring to this folder.
+
 Offline processes of GAREMP is depend on 
 
 [fangq](https://github.com/fangq)/[JSONLAB](https://github.com/fangq/jsonlab) (a MATLAB toolbox to encode/decode JSON files), 
@@ -17,25 +36,6 @@ and two executables:
 [Flow-Based Cartogram Generator](https://github.com/Flow-Based-Cartograms/go_cart), 
 
 and [brrcrites](https://github.com/brrcrites)/[graph-coloring](https://github.com/brrcrites/graph-coloring).
-
-## License
-Apache-2.0 © 2019-2020 Jin Yan
-
-Capital University of Economics and Business
-
-Beijing, China
-
-##
-
-## Source file
-
-File 'maps.json' which is generated from [Gephi](https://github.com/gephi/gephi) (A Graph modelling and visualization tool) is the source and sample file of the following offline processes.
-
-You can process your own JSON file by using the following approach.
-
-## Prerequisites
-
-Clone dependence (JSONLAB, Bounding-Spheres-And-Circles, Flow-Based Cartogram Generator, and graph-coloring), and build Flow-Based Cartogram Generator, and graph-coloring, move executables of Flow-Based Cartogram Generator, and graph-coloring to this folder.
 
 ## Offline Processes of GAREMP
 
