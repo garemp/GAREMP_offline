@@ -16,9 +16,11 @@ and [brrcrites](https://github.com/brrcrites)/[graph-coloring](https://github.co
 
 File 'maps.json' which is generated from [Gephi](https://github.com/gephi/gephi) (A Graph modelling and visualization tool) is the source file of the following offline processes.
 
-## 
+## Prerequisites
 
-## Offline Processes
+Clone dependence (JSONLAB, Bounding-Spheres-And-Circles, Flow-Based Cartogram Generator, and graph-coloring), and build Flow-Based Cartogram Generator, and graph-coloring, move executables of Flow-Based Cartogram Generator, and graph-coloring to this folder.
+
+## Offline Processes of GAREMP
 
 ### mark directed edges
 
@@ -34,9 +36,11 @@ Run distortGraph('maps+flipped.json', 'maps+distort.json'); to distort the graph
 
 ### flip undirected deges once more
 
-Run flipEdges('maps+distort.json', 'maps+mono.json');.
+Run flipEdges('maps+distort.json', 'maps+mono.json'); to flip source and target end-points of undirected edges once more.
 
 ### calc and add colors
+
+Run addColors('maps+mono.json', 'maps+color.json'); to calculate intersection between edges and assign distinct colors to intersected edges.
 
 ### add attributes and relationship
 
