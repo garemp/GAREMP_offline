@@ -1,4 +1,4 @@
-function [  ] = flipEdges( filename, outname )
+function [  ] = flipEdges( filename, outfile )
 
 addpath('jsonlab');
 addpath('AntonSemechko-Bounding-Spheres-And-Circles');
