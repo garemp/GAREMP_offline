@@ -1,1 +1,1 @@
-# GAREMP_offline
+Offline processes of GAREMP is depend on (JSONLAB)[https://github.com/fangq/jsonlab] (a MATLAB toolbox to encode/decode JSON files), (AntonSemechko-Bounding-Spheres-And-Circles)[https://github.com/AntonSemechko/Bounding-Spheres-And-Circles] (a library to find minimum bounding spheres), and (Flow-Based Cartogram Generator)[https://github.com/Flow-Based-Cartograms/go_cart] and (brrcrites/graph-coloring)[https://github.com/brrcrites/graph-coloring] executables.
