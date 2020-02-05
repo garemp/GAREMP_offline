@@ -10,14 +10,16 @@ and two executables:
 
 and [brrcrites](https://github.com/brrcrites)/[graph-coloring](https://github.com/brrcrites/graph-coloring).
 
-#Source file
+##
 
-A JSON file 'maps.json' is generated from [Gephi](https://github.com/gephi/gephi) (A Graph modelling and visualization tool).
+# Source file
 
-#Offline Process
+File 'maps.json' which is generated from [Gephi](https://github.com/gephi/gephi) (A Graph modelling and visualization tool) is the source file of the following offline processes.
 
 ## 
 
-Run addArrow.m
+# Offline Processes
 
-Run flipArrow.m
+## Run addArrow.m
+
+## Run flipArrow.m
