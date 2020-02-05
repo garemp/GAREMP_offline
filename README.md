@@ -10,6 +10,13 @@ and two executables:
 
 and [brrcrites](https://github.com/brrcrites)/[graph-coloring](https://github.com/brrcrites/graph-coloring).
 
+## License
+Apache-2.0 © 2019-2020 Jin Yan
+
+Capital University of Economics and Business
+
+Beijing, China
+
 ##
 
 ## Source file
