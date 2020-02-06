@@ -1,4 +1,13 @@
 function [  ] = addArrows( filename, outfile )
+% Apache-2.0 © 2019-2020 Jin Yan
+% School of Management and Engineering, 
+% Capital University of Economics and Business, Beijing, China
+% Copyright @ 2019-2020
+% All Right Reserved
+% GAREMP: Graphical Attribute and Relationship Explorer for Map Projections
+% http://garemp.github.io/
+%
+% Mark directed edges by using a 'curved' attribute in maps.json.
 
 close all
 
