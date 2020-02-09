@@ -15,6 +15,8 @@ Beijing, China
 
 File 'maps+sample.json' which is generated from [Gephi](https://github.com/gephi/gephi) (A Graph modelling and visualization tool) is provided as the source and sample file of the following offline processes.
 
+[!RAW JSON FILE](https://raw.githubusercontent.com/garemp/GAREMP_offline/master/screensnap/raw.json.jpg)
+
 You can process your own JSON file by using the following approach.
 
 ## Prerequisites
@@ -49,6 +51,10 @@ Run distortGraph('maps+flipped.json', 'maps+distort.json'); to distort the graph
 
 This step would take a long time for cartogram-based distortion. Have a break.
 
+Distorted graph are shown as below.
+
+[!Distorted Graph](https://raw.githubusercontent.com/garemp/GAREMP_offline/master/screensnap/distorted.json.jpg)
+
 ### flip undirected deges once more
 
 Run flipEdges('maps+distort.json', 'maps+mono.json'); to flip source and target end-points of undirected edges once more.
@@ -56,6 +62,10 @@ Run flipEdges('maps+distort.json', 'maps+mono.json'); to flip source and target 
 ### calc and add colors
 
 Run addColors('maps+mono.json', 'maps+color.json'); to calculate intersection between edges and assign distinct colors to intersected edges.
+
+Chromatic graph are shown as below.
+
+[!Chromatic Graph](https://raw.githubusercontent.com/garemp/GAREMP_offline/master/screensnap/chromatic.json.jpg)
 
 ### add attributes and relationship
 
