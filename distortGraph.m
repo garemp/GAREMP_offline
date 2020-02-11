@@ -1,6 +1,7 @@
 function [  ] = distortGraph( filename, outfile )
 
 addpath('jsonlab');
+addpath('matlab-toolboxes/toolbox_graph');
 addpath('AntonSemechko-Bounding-Spheres-And-Circles');
 addpath('AntonSemechko-Bounding-Spheres-And-Circles/Auxiliary');
 
@@ -21,6 +22,8 @@ end
 [radium_nocarto, center_nocarto] = ExactMinBoundCircle([xx; yy]');
 
 DT = delaunay(xx, yy);
+
+edges_matrix_orig = calc_edge_matrix( xx, yy, DT );
 
 djson.type='FeatureCollection';
 djson.features=cell(1, size(DT, 1));
@@ -155,16 +158,40 @@ for i = 1:size(dt_pts, 1)
     end
 end
 
-pt_match(65) = 10;
-pt_match(37) = 57;
-pt_match(32) = 13;
-pt_match(26) = 73;
-pt_match(38) = 58;
-pt_match(82) = 75;
-pt_match(78) = 11;
-pt_match(62) = 85;
-pt_match(86) = 71;
-pt_match(83) = 35;
+for i = 1:size(dt_pts, 1)
+    ff = find(pt_match == i);
+    if size(ff, 1) > 1
+        pt_match(ff) = 0;
+    end
+end
+
+for i = 1:size(dt_pts, 1)
+    if pt_match(i) == 0
+        pt_match(i) = 1000 + i;
+    end
+end
+
+for i = 1:size(idx, 1)
+    for j = 1:3
+        idx_adj(i, j) = pt_match(idx(i, j));
+    end
+end
+
+edges_matrix = calc_edge_matrix( xx, yy, idx_adj );
+
+for i = 1:size(dt_pts, 1)
+    ne_orig = edges_matrix_orig(i, :);
+    ne = edges_matrix(i, :);
+    ff = find(ne > 999);
+    if size(ff, 2) == 1
+        for j = 1:ff - 1
+            ffo = find(ne_orig == ne(j));
+            ne_orig(ffo) = 0;
+        end
+        ffo = find(ne_orig ~= 0);
+        pt_match(ne(ff) - 1000) = ne_orig(ffo);
+    end
+end
 
 nodes_carto = nodes;
 for i = 1:size(nodes, 2)
