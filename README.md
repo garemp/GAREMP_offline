@@ -21,13 +21,15 @@ You can process your own JSON file by using the following approach.
 
 ## Prerequisites
 
-Clone dependence (JSONLAB, Bounding-Spheres-And-Circles, Flow-Based Cartogram Generator, and graph-coloring, see below), and build Flow-Based Cartogram Generator, and graph-coloring, move executables of Flow-Based Cartogram Generator, and graph-coloring to this folder.
+Clone dependence (JSONLAB, Bounding-Spheres-And-Circles, matlab-toolboxes, Flow-Based Cartogram Generator, and graph-coloring, see below), and build Flow-Based Cartogram Generator, and graph-coloring, move executables of Flow-Based Cartogram Generator, and graph-coloring to this folder.
 
-Offline processes of GAREMP is depend on 
+Offline processes of GAREMP is depend on three MATLAB libraries, 
 
 [fangq](https://github.com/fangq)/[JSONLAB](https://github.com/fangq/jsonlab) (a MATLAB toolbox to encode/decode JSON files), 
 
 [AntonSemechko](https://github.com/AntonSemechko)/[Bounding-Spheres-And-Circles](https://github.com/AntonSemechko/Bounding-Spheres-And-Circles) (a library to find minimum bounding spheres), 
+
+[matlab-toolboxes](https://github.com/gpeyre/matlab-toolboxes), a function (i.e., compute_edges, to compute list of edges, from list of faces) which is included in toolbox_graph is used in GAREMP_offline, toolbox_graph is included in matlab-toolboxes, 
 
 and two executables:
 
