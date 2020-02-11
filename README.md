@@ -25,15 +25,13 @@ Offline processes of GAREMP is dependent on three MATLAB libraries:
 
 [fangq](https://github.com/fangq)/[JSONLAB](https://github.com/fangq/jsonlab) (a MATLAB toolbox to encode/decode JSON files), 
 
-[AntonSemechko](https://github.com/AntonSemechko)/[Bounding-Spheres-And-Circles](https://github.com/AntonSemechko/Bounding-Spheres-And-Circles) (a library to find minimum bounding spheres), 
+[AntonSemechko](https://github.com/AntonSemechko)/[Bounding-Spheres-And-Circles](https://github.com/AntonSemechko/Bounding-Spheres-And-Circles) (a library to find minimum bounding spheres for given set of points), 
 
-[matlab-toolboxes](https://github.com/gpeyre/matlab-toolboxes), a function (i.e., compute_edges, to compute list of edges, from list of faces) which is included in toolbox_graph is used in GAREMP_offline, toolbox_graph is included in matlab-toolboxes, 
+[matlab-toolboxes](https://github.com/gpeyre/matlab-toolboxes), a function (i.e., compute_edges, to compute list of edges, from list of faces) which is included in toolbox_graph is used in GAREMP_offline, toolbox_graph is included in matlab-toolboxes.
 
 Offline processes of GAREMP is also dependent on two executables:
 
-[Flow-Based Cartogram Generator](https://github.com/Flow-Based-Cartograms/go_cart), 
-
-and [brrcrites](https://github.com/brrcrites)/[graph-coloring](https://github.com/brrcrites/graph-coloring).
+[Flow-Based Cartogram Generator](https://github.com/Flow-Based-Cartograms/go_cart) and [brrcrites](https://github.com/brrcrites)/[graph-coloring](https://github.com/brrcrites/graph-coloring).
 
 Clone above dependence (JSONLAB, Bounding-Spheres-And-Circles, matlab-toolboxes, Flow-Based Cartogram Generator, and graph-coloring), and build Flow-Based Cartogram Generator, and graph-coloring, move executables of Flow-Based Cartogram Generator, and graph-coloring to this folder.
 
