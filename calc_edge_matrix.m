@@ -1,4 +1,14 @@
 function [ edges_matrix ] = calc_edge_matrix( xx, yy, DT )
+% Apache-2.0 © 2019-2020 Jin Yan
+% School of Management and Engineering, 
+% Capital University of Economics and Business, Beijing, China
+% Copyright @ 2019-2020
+% All Right Reserved
+% GAREMP: Graphical Attribute and Relationship Explorer for Map Projections
+% http://garemp.github.io/
+%
+% Calculate adjacent edges for given node in a triangulated network, save the result in a matrix
+% Each row represents all adjacent edges for a node
 
 edges_matrix = [];
 DT_edges = compute_edges(DT);
