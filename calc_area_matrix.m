@@ -1,4 +1,19 @@
 function [ areamatrix_orig ] = calc_area_matrix( xx, yy, DT, center_nocarto, radium_nocarto, dt_count )
+% Apache-2.0 © 2019-2020 Jin Yan
+% School of Management and Engineering, 
+% Capital University of Economics and Business, Beijing, China
+% Copyright @ 2019-2020
+% All Right Reserved
+% GAREMP: Graphical Attribute and Relationship Explorer for Map Projections
+% http://garemp.github.io/
+%
+% Calculate a matrix to represent the topology of a triangulated network
+% Each row of the matrix contains values of a given metric (e.g., area of triangle) for a given vertex
+% For the given vertex, all adjacent faces to that vertex are obtained, and the metric for all adjacent faces are calcultaed 
+% The metric is stored in one row of the matrix, and largest one is at first column
+% Other values of the metric is counterclockwise ordered
+% For the given vertex, a vertex of the largest neighbor face is select
+% Same process is applied to the neighbor vertex (calculate adjacent faces and metrics)
 
 areamatrix_orig = [];
 for i = 1:size(xx, 2)
