@@ -1,4 +1,13 @@
 function [  ] = flipEdges( filename, outfile )
+% Apache-2.0 © 2019-2020 Jin Yan
+% School of Management and Engineering, 
+% Capital University of Economics and Business, Beijing, China
+% Copyright @ 2019-2020
+% All Right Reserved
+% GAREMP: Graphical Attribute and Relationship Explorer for Map Projections
+% http://garemp.github.io/
+%
+% Flip curves by a metric representing curve-to-node proximity
 
 addpath('jsonlab');
 addpath('AntonSemechko-Bounding-Spheres-And-Circles');
