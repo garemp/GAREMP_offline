@@ -1,4 +1,17 @@
 function [ overlay_mat ] = fun_calc_overlay( nodes, edges, offs_by_radius )
+% Apache-2.0 © 2019-2020 Jin Yan
+% School of Management and Engineering, 
+% Capital University of Economics and Business, Beijing, China
+% Copyright @ 2019-2020
+% All Right Reserved
+% GAREMP: Graphical Attribute and Relationship Explorer for Map Projections
+% http://garemp.github.io/
+%
+% Given a pair of curves, check whether they are intersected or not
+% Intersection is defined as 
+% 1.two curves are closely enough (less than given threshold)
+% 2.two curves intersect at non-endpoint
+% 3.two curves intersect at endpoint of both curves, and angle between tangents is less than a given threshold, or greater than pi minus that threshold
 
 overlay_mat = zeros(size(edges, 2), size(edges, 2));
 
