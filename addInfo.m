@@ -6,9 +6,12 @@ function [  ] = addInfo( filename, outfile )
 % All Right Reserved
 % GAREMP: Graphical Attribute and Relationship Explorer for Map Projections
 % http://garemp.github.io/
+%
+% Add properties to the final JSON file
+% Properties includes alias, classification, distortion, authors, year of creation, etc.
+% Relationship and neighbors are also appended to JSON file
 
 addpath('jsonlab');
-
 
 global nodes;
 global edges;
@@ -17,6 +20,7 @@ data = loadjson(filename);
 nodes = data.nodes;
 edges = data.edges;
 
+% Add comments to JSON file
 data.version = '2020-Feb-6';
 data.comments.line1 = 'Author';
 data.comments.line2 = 'Jin Yan, from School of Management and Engineering';
@@ -28,6 +32,7 @@ data.comments.line7 = 'is forbidden to utilize or reuse without permission.';
 data.comments.line8 = 'GAREMP: Graphical Attribute and Relationship Explorer for Map Projections';
 data.comments.line9 = 'http://garemp.github.io/';
 
+% Adjust order of fields in the resulting JSON file
 C = {'version','comments','nodes','edges'};
 data = orderfields(data, C);
 
@@ -43,6 +48,7 @@ global ecnt;
 ncnt = 0;
 ecnt = 0;
 
+% Add basic information
 %       NAME        TYPE    PROP YEAR    IMG         AUTHOR
 %       FULLNAME    ALIAS
 addInfos('HEALPix', 'PCY', 'A', '1997', 'healpix', 'Krzysztof M. Górski');
@@ -190,6 +196,7 @@ addInfos('Briesemeister', 'LEN', 'A', '1953', 'briesemeister-v2', 'William A. Br
 disp('actual nodes count:');
 disp(ncnt);
 
+% Add more properties which is used for filtering
 cat = 'normal';
 addCategory('Mercator', cat);
 addCategory('Plate Carrée', cat);
@@ -585,7 +592,7 @@ addCategory('Winkel 3', cat);
 addCategory('Winkel 3 BOPC', cat);
 addCategory('Winkel-Snyder', cat);
 
-
+% Add description for relationship from one map projection to another one, save it as properties of curves
 addRelation('Sinusoidal', 'Bonne', '<b>Sinusoidal projection</b> is a special case of <b>Bonne projection</b> where its standard parallel is 0&deg;, while standard parallel of Bonne projection is arbitrary (typically is 45&deg;N).');
 addRelation('Werner', 'Bonne', '<b>Werner projection</b> is a special case of <b>Bonne projection</b> where its standard parallel is 90&deg;N, while standard parallel of Bonne projection is arbitrary (typically is 45&deg;N).');
 addRelation('Bottomley', 'Bonne', '<b>Bottomley projection</b> is a special case of <b>Bonne projection</b> where its standard parallel is 30&deg;N, while standard parallel of Bonne projection is arbitrary (typically is 45&deg;N).');
@@ -731,13 +738,16 @@ addRelation('Hammer', 'Briesemeister', '<b>Briesemeister projection</b> is a obl
 data.nodes = nodes;
 data.edges = edges;
 
+% Adjust drawing order of curves
 order = reorderEdges();
 data.edges = data.edges(order);
 
 edges = data.edges;
 
+% Calculate endpoints for curves, save endpoint nodes as properties of curves
 calcEndpts4Edge();
 
+% Calculate neighbors for nodes, save neighbors and the corresponding curves as properties of nodes
 calcNeighb();
 
 data.nodes = nodes;
@@ -748,6 +758,7 @@ disp(ecnt);
 
 savejson([], data, outfile);
 
+% Compress JSON file (remove spaces, tabs, line breaks)
 fid = fopen(outfile);
 fidout = fopen([outfile, '+w'], 'w');
 
@@ -761,10 +772,6 @@ while ischar(tline)
         if ~isempty(ffb)
             tline(ffb + 2) = [];
         end
-%         ffb = strfind(tline,'": [');
-%         if ~isempty(ffb)
-%             tline(ffb + 2) = [];
-%         end
         fwrite(fidout, tline(size(ff, 2)+1:end), 'char');
     end
     tline = fgetl(fid);
@@ -778,6 +785,7 @@ movefile([outfile, '+w'], outfile);
 end
 
 function [  ] = addRelation( node1, node2, desc )
+% Add description for relationship from one map projection to another one, save it as properties of curves
 
 global nodes;
 global edges;
@@ -831,22 +839,8 @@ end
 
 end
 
-% function [  ] = reorderNeighb(  )
-% 
-% global nodes;
-% global edges;
-% 
-% for i = 1:size(nodes, 2)
-%     ang = [];
-%     neig = nodes{i}.neighbors;
-%     for j = 2:size(neig, 2)
-%         nb = neig(j+1);
-%     end
-% end
-% 
-% end
-
 function [  ] = calcNeighb(  )
+% Calculate neighbors for nodes, save neighbors and the corresponding curves as properties of nodes
 
 global nodes;
 global edges;
@@ -876,6 +870,8 @@ for i = 1:size(nodes, 2)
             py(end + 1) = y(end) - y(end - 1);
         end
     end
+
+% Adjust neighbors in counterclockwise order
     ang = atan2(px, py);
     [s, ord] = sort(ang, 'descend');
     nodes{i}.neighbors = [0, nodes{i}.neighbors(ord + 1)];
@@ -885,6 +881,9 @@ end
 end
 
 function [ order ] = reorderEdges(  )
+% Calculate endpoints for curves, save endpoint nodes as properties of curves
+% Drawing order of curves is followed by undirected curves, then directed curves 
+% Internal order of undirected or directed curves is drawing long curves first, then short curves
 
 global nodes;
 global edges;
@@ -915,6 +914,7 @@ order = [ffnot(ord2), ff(ord1)];
 end
 
 function [  ] = calcEndpts4Edge(  )
+% Calculate endpoints for curves, save endpoint nodes as properties of curves
 
 global nodes;
 global edges;
@@ -936,6 +936,7 @@ end
 end
 
 function [  ] = addInfos( node, type, prop, year, img, author, name, alias )
+% Add basic information
 
 global ncnt;
 
@@ -1012,8 +1013,9 @@ for i = 1:size(nodes, 2)
         end
         nodes{i}.crby = author;
         nodes{i}.year = year;
-        nodes{i}.img = ['img/png/', img, '.png'];
-%         nodes{i}.img = ['img/nop.png'];
+%         nodes{i}.img = ['img/png/', img, '.png'];
+% no preview image at present
+        nodes{i}.img = ['img/nop.png'];
     end
 end
 
@@ -1024,6 +1026,7 @@ end
 end
 
 function [  ] = addCategory( node, cat )
+% Add more properties which is used for filtering
 
 global nodes;
 
