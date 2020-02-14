@@ -1,4 +1,14 @@
 function [  ] = add_brackets( filename )
+% Apache-2.0 © 2019-2020 Jin Yan
+% School of Management and Engineering, 
+% Capital University of Economics and Business, Beijing, China
+% Copyright @ 2019-2020
+% All Right Reserved
+% GAREMP: Graphical Attribute and Relationship Explorer for Map Projections
+% http://garemp.github.io/
+%
+% Add brackets to JSON file
+% The resulting JSON would be used by cartogram algorithm
 
 fid = fopen(filename);
 fidout = fopen([filename, '+b', '.json'], 'w');
