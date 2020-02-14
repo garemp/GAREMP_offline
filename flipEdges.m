@@ -7,7 +7,8 @@ function [  ] = flipEdges( filename, outfile )
 % GAREMP: Graphical Attribute and Relationship Explorer for Map Projections
 % http://garemp.github.io/
 %
-% Flip curves by a metric representing curve-to-node proximity
+% Check for exchanging source and target endpoints of curves 
+% It is determined by a metric representing curve-to-node proximity
 
 addpath('jsonlab');
 addpath('AntonSemechko-Bounding-Spheres-And-Circles');
