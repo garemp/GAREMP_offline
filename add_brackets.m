@@ -9,24 +9,24 @@ function [  ] = add_brackets( filename )
 %
 % Add brackets to JSON file
 % Here is a snippet of a sample JSON file
-% 		{
-% 			"type": "Feature",
-% 			"id": 0,
-% 			"geometry": {
-% 				"type": "MultiPolygon",
-% 				"coordinates": [[[
-%                              ^^ <-'[[' is added by this function
-% 					[-862.1882935,-272.5610352],
-% 					[-921.7738037,-107.7567368],
-% 					[-813.0441284,-447.0093079],
-% 					[-862.1882935,-272.5610352]
-% 				]]]
-%                ^^ <-']]' is added by this function
-% 			},
-% 			"properties": {
-% 				"cartogram_id": "1"
-% 			}
-% 		},
+%        {
+%            "type": "Feature",
+%            "id": 0,
+%            "geometry": {
+%                "type": "MultiPolygon",
+%                "coordinates": [[[
+%                                ^^ <-'[[' is added by this function
+%                    [-862.1882935,-272.5610352],
+%                    [-921.7738037,-107.7567368],
+%                    [-813.0441284,-447.0093079],
+%                    [-862.1882935,-272.5610352]
+%                ]]]
+%                 ^^ <-']]' is added by this function
+%                },
+%                "properties": {
+%                "cartogram_id": "1"
+%            }
+%        },
 % The resulting JSON would be used by cartogram algorithm
 
 fid = fopen(filename);
