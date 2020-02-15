@@ -69,7 +69,9 @@ Chromatic graph are shown as below.
 
 ### add attributes and relationship
 
-Run addInfo('maps+color.json', 'maps.json'); to add attributes, classification, relationship, adjust order or drawing, and calculate neighborship of nodes and endpoints of edges to obtain the final JSON file used in GAREMP.
+Run addInfo('maps+color.json', 'maps+results.json'); to add attributes, classification, relationship, adjust order or drawing, and calculate neighborship of nodes and endpoints of edges to obtain the final JSON file.
+
+Rename 'maps+results.json' to 'maps.json' which would be used in GAREMP。
 
 ### Run commands in one command
 
