@@ -14,6 +14,29 @@ function [ areamatrix_orig ] = calc_area_matrix( xx, yy, DT, center_nocarto, rad
 % Other values of the metric is counterclockwise ordered
 % For the given vertex, a vertex of the largest neighbor face is select
 % Same process is applied to the neighbor vertex (calculate adjacent faces and metrics)
+%
+% For a given node N, it is the common vertex for six faces, just like this
+%     V8 ---  V7
+%    / \ 107 /  \
+%   /   \   /    \
+%  / 102 \ /  103 \
+% V9 ---  V1  ---  V2
+%  \ 97  /  \  96 /  \
+%   \   /    \   /    \
+%    \ /  95  \ /  88  \
+%     V6  ---  N  ---  V3
+%      \  84  / \  80  /
+%       \    /   \    /
+%        \  /  77 \  /
+%         V5  ---- V4
+% Metric (using specific metric or the area of faces) for six faces are calculated
+% calc_area_matrix return a matrix, the Nth row of the matrix is like this 
+%     96    88    80    77    84    95     0     0     0     0    96   103   100    89    85    88     0     0     0     0
+% The largest value of that metric is in the first column, other faces follow clockwise with zero filling
+% The triangle N-V1-V2 has the largest value of metric, metric of triangle N-V2-V3 is in the second column of matrix
+% Then using vertex V1 as the central vertex, re-calculated metrics for faces with common vertex V1
+% Counterclockwise is used, and zeros fill at tail
+% Above-computed matrix is used to match two triangulated networks
 
 areamatrix_orig = [];
 for i = 1:size(xx, 2)
