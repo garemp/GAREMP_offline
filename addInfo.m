@@ -10,6 +10,63 @@ function [  ] = addInfo( filename, outfile )
 % Add properties to the final JSON file
 % Properties includes alias, classification, distortion, authors, year of creation, etc.
 % Relationship and neighbors are also appended to JSON file
+%
+% Snippet of input file
+% a given node
+% {
+%     "label": "Aitoff",
+%     "x": 198.078,
+%     "y": 253.785,
+%     "id": "17",
+%     "attributes": [],
+%     "color": "rgb(192,192,192)",
+%     "size": 10
+% }
+% a given edge
+% {
+%     "source": "95",
+%     "target": "70",
+%     "id": "161",
+%     "attributes": [],
+%     "color": "rgb(245,130,49)",
+%     "size": 1
+% }
+% Snippet of resulting file
+% the resulting node
+% {
+%     "label": "Aitoff",
+%     "x": 198.078,
+%     "y": 253.785,
+%     "id": "17",
+%     "attributes": [
+%         "lenticular",
+%         "pseudoazimuthal",
+%         "compromise",
+%         "2:1 ellipse",
+%         "as points",
+%         "blending-src",
+%         "construction"
+%     ],
+%     "color": "rgb(192,192,192)",
+%     "size": 10,
+%     "crby": "David A. Aitoff",
+%     "year": "1889",
+%     "img": "img\/png\/aitoff.png",
+%     "neighbors": [0,56,12,3],
+%     "edges": [0,96,115,9]
+% }
+% the resulting edge
+% {
+%     "source": "95",
+%     "target": "70",
+%     "id": "161",
+%     "attributes": [],
+%     "color": "rgb(245,130,49)",
+%     "size": 1,
+%     "desc": "<b>Wagner 1<\/b>, Wagner 2 and <b>Wagner 3<\/b> have the same shape.",
+%     "s": 73,
+%     "t": 9
+% }
 
 addpath('jsonlab');
 
