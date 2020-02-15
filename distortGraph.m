@@ -51,6 +51,24 @@ for i = 1:size(DT, 1)
     djson.features{i}.properties.cartogram_id = num2str(i);
 end
 
+% Save to a JSON file which describe the triangulated network
+% {
+%     "type": "Feature",
+%     "id": 0,
+%     "geometry": {
+%         "type": "MultiPolygon",
+%         "coordinates": [[[
+%             [-862.1882935,-272.5610352],
+%             [-921.7738037,-107.7567368],
+%             [-813.0441284,-447.0093079],
+%             [-862.1882935,-272.5610352]
+%         ]]]
+%     },
+%     "properties": {
+%     "cartogram_id": "1"
+%     }
+% }
+% the JSON file would be processed by the 'cartogram' executable
 savejson([], djson, 'maps_carto.json');
 % Add brackets to JSON file
 add_brackets('maps_carto.json');
@@ -106,6 +124,14 @@ end
 areamatrix_orig = calc_area_matrix( xx, yy, DT, center_nocarto, radium_nocarto, dt_count * 10 );
 
 % Write metric of triangles to a CVS file
+% The format of CSV file is 
+% Region.Id,Region.Data
+%  1, 67
+%  2, 82
+%  3, 75
+% ..,...
+% where Region.Data is the metric computed for each triangle
+% in additionto above JSON file, the CSV file would also be processed by the 'cartogram' executable
 comma = repmat(',', size(dt_count, 1), 1);
 ret = repmat(sprintf('\n'), size(dt_count, 1), 1);
 state = repmat('state ', size(dt_count, 1), 1);
