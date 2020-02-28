@@ -112,6 +112,13 @@ function [ ser, inter, j ] = calc_area_matrix_inside( i, xx, yy, DT, center_noca
         [ ptc, pto, pt1 ] = find_oppsite(i, xx, yy, DT, idx, cur);
     end
     
+    if ser(1) == ser(end)
+        ff = find(ser == ser(1));
+        if size(ff, 2) > 1
+            ser = [ser(size(ser, 2)-size(ff, 2)+2:end), ser(1:size(ser, 2)-size(ff, 2)+1)];
+        end
+    end
+    
     for j = 1:size(xx, 2)
         if pto(1) == xx(j) && pto(2) == yy(j)
             break;
