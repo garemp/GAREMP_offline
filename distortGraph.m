@@ -28,15 +28,12 @@ for i = 1:size(nodes, 2)
     yy(end + 1) = n.y;
 end
 
-% Calculate the bounding sphere for given set of points
 [radium_nocarto, center_nocarto] = ExactMinBoundCircle([xx; yy]');
 
 DT = delaunay(xx, yy);
 
-% Calculate adjacent edges all nodes in a triangulated network
 edges_matrix_orig = calc_edge_matrix( xx, yy, DT );
 
-% Write topology of triangulation to a JSON file which would be used in the process of distortion by cartogram algorithm
 djson.type='FeatureCollection';
 djson.features=cell(1, size(DT, 1));
 djson.bbox = [min(xx), min(yy), max(xx), max(yy)];
@@ -51,29 +48,9 @@ for i = 1:size(DT, 1)
     djson.features{i}.properties.cartogram_id = num2str(i);
 end
 
-% Save to a JSON file which describe the triangulated network
-% {
-%     "type": "Feature",
-%     "id": 0,
-%     "geometry": {
-%         "type": "MultiPolygon",
-%         "coordinates": [[[
-%             [-862.1882935,-272.5610352],
-%             [-921.7738037,-107.7567368],
-%             [-813.0441284,-447.0093079],
-%             [-862.1882935,-272.5610352]
-%         ]]]
-%     },
-%     "properties": {
-%     "cartogram_id": "1"
-%     }
-% }
-% the JSON file would be processed by the 'cartogram' executable
 savejson([], djson, 'maps_carto.json');
-% Add brackets to JSON file
 add_brackets('maps_carto.json');
 
-% A metric for each vertex in the triangulation
 dtvert_count = zeros(size(xx, 2), 1);
 
 xt = (xx - center_nocarto(1)) / radium_nocarto * 100;
@@ -92,7 +69,10 @@ for i = 1:size(xx, 2)
     for j = 1:size(edges, 2)
         e = edges{j};
         [ s, t ] = fun_edge_curve( nodes, e );
-        [x, y] = fun_js_curve(s, t);
+        if ~isfield(e, 'flip')
+            e.flip = 'false';
+        end
+        [x, y] = fun_js_curve(s, t, e.flip);
         x = (x - center_nocarto(1)) / radium_nocarto * 100;
         y = (y - center_nocarto(2)) / radium_nocarto * 100;
         [idx, d] = knnsearch([x; y]', [xt, yt]);
@@ -110,7 +90,6 @@ for i = 1:size(xx, 2)
 end
 toc
 
-% A metric for each triangle in the triangulation
 dt_count = zeros(size(DT, 1), 1);
 for i = 1:size(DT, 1)
     idx = DT(i, :);
@@ -119,19 +98,8 @@ for i = 1:size(DT, 1)
     dt_count(i) = dt_count(i) + dtvert_count(idx(3)); 
 end
 
-% Calculate a matrix
-% Each row in the matrix represents all metrics of adjacent triangles for a given node
 areamatrix_orig = calc_area_matrix( xx, yy, DT, center_nocarto, radium_nocarto, dt_count * 10 );
 
-% Write metric of triangles to a CVS file
-% The format of CSV file is 
-% Region.Id,Region.Data
-%  1, 67
-%  2, 82
-%  3, 75
-% ..,...
-% where Region.Data is the metric computed for each triangle
-% in additionto above JSON file, the CSV file would also be processed by the 'cartogram' executable
 comma = repmat(',', size(dt_count, 1), 1);
 ret = repmat(sprintf('\n'), size(dt_count, 1), 1);
 state = repmat('state ', size(dt_count, 1), 1);
@@ -142,10 +110,8 @@ fwrite(fp, ['Region.Id,Region.Data', sprintf('\n')], 'char');
 fwrite(fp, str', 'char');
 fclose(fp);
 
-% Call cartogram algorithm to distort the triangulated network
-system(['./cartogram -eig maps_carto.json -a dt_count.csv']);
+% system(['./cartogram -eig maps_carto.json -a dt_count.csv']);
 
-% Read the resulting distorted triangulation
 fid = fopen('cartogram.eps');
 
 dt_tris = [];
@@ -164,50 +130,40 @@ fclose(fid);
 
 thisarea = [];
 
-% Calculate area of each triangle in the resulting triangulation
 for i=1:size(dt_tris, 1)/4
     xxx = dt_tris(i*4-3:i*4, 1);
     yyy = dt_tris(i*4-3:i*4, 2);
     thisarea(end + 1) = polyarea(xxx, yyy);
 end
 
-% Normalize area of triangles
 thisarea = round(thisarea / max(thisarea) * max(dt_count) * 10);
 
 dt_pts = unique(dt_tris, 'rows');
 areamatrix = [];
 
-% Calculate the bounding sphere for the resulting set of points
 [radium_nocarto, center_nocarto] = ExactMinBoundCircle(dt_pts);
 
 idx = [];
 
-% Obtain the facet index of resulting triangulation
 for i = 1:size(dt_tris, 1) / 4
     tri = dt_tris([i*4-3,i*4-2,i*4-1], :);
     ff = find(ismember(dt_pts, tri, 'rows'));
     idx(end + 1, :) = ff';
 end
 
-% Calculate a matrix
-% Each row in the matrix represents all metrics of adjacent triangles for a given node in the resulting triangulation
 areamatrix = calc_area_matrix( dt_pts(:, 1)', dt_pts(:, 2)', idx, center_nocarto, radium_nocarto, thisarea' );
 
 pt_match = zeros(size(dt_pts, 1), 1);
 pt_not_matched = 1:size(dt_pts, 1);
-pt_error = zeros(size(dt_pts, 1), 1);
 
-% Match vertex index from above-computed two matrices (areamatrix and areamatrix_orig)
 for i = 1:size(dt_pts, 1)
     area = areamatrix(i, :);
     [ff, d] = knnsearch(areamatrix_orig, area, 'K', 3);
-    if pt_not_matched(ff(1)) == 0
-        disp('!!ERROR: ALREADY SET TO ZERO !!!!!!!!!!');
-    else
-        pt_not_matched(ff(1)) = 0;
-    end
     if ~isempty(ff)
         pt_match(i) = ff(1);
+    end
+    if d(3) < 20
+        pt_match(i) = 0;
     end
 end
 
@@ -224,32 +180,38 @@ for i = 1:size(dt_pts, 1)
     end
 end
 
-for i = 1:size(idx, 1)
-    for j = 1:3
-        idx_adj(i, j) = pt_match(idx(i, j));
-    end
-end
+while 1
+    fd = find(pt_match > 1000);
+    if size(fd, 1) > 0
 
-% Calculate adjacent edges all nodes in the resulting triangulated network
-edges_matrix = calc_edge_matrix( xx, yy, idx_adj );
-
-% Match vertex index from above-computed two matrices (edges_matrix and edges_matrix_orig)
-% for those not correctly matched vertex
-for i = 1:size(dt_pts, 1)
-    ne_orig = edges_matrix_orig(i, :);
-    ne = edges_matrix(i, :);
-    ff = find(ne > 999);
-    if size(ff, 2) == 1
-        for j = 1:ff - 1
-            ffo = find(ne_orig == ne(j));
-            ne_orig(ffo) = 0;
+        for i = 1:size(idx, 1)
+            for j = 1:3
+                idx_adj(i, j) = pt_match(idx(i, j));
+            end
         end
-        ffo = find(ne_orig ~= 0);
-        pt_match(ne(ff) - 1000) = ne_orig(ffo);
+
+        edges_matrix = calc_edge_matrix( xx, yy, idx_adj );
+
+        for i = 1:size(dt_pts, 1)
+            ne_orig = edges_matrix_orig(i, :);
+            ne = edges_matrix(i, :);
+            ff = find(ne > 999);
+            if size(ff, 2) == 1
+                for j = 1:ff - 1
+                    ffo = find(ne_orig == ne(j));
+                    ne_orig(ffo) = 0;
+                end
+                ffo = find(ne_orig ~= 0);
+                if size(ffo, 2) == 1
+                    pt_match(ne(ff) - 1000) = ne_orig(ffo);
+                end
+            end
+        end
+    else
+        break;
     end
 end
 
-% Using coordinates of matched index of nodes to replace coordinates of original nodes
 nodes_carto = nodes;
 for i = 1:size(nodes, 2)
     nodes_carto{pt_match(i)}.x = dt_pts(i, 1);
@@ -259,7 +221,6 @@ nodes = nodes_carto;
 
 data.nodes = nodes;
 
-% Save JSON file
 savejson([], data, outfile);
 
 end
